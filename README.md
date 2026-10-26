@@ -110,9 +110,15 @@ python -m unittest discover -s tests -v
 
 The tests cover stripping the image part, JSON pass-through and an end-to-end run against a stand-in server that rejects non-UTF-8 bodies, as Ryot does.
 
-## Contributing
+## Support and contributions
 
-Issues and pull requests are welcome. If you hit a Plex or Ryot version where this behaves differently, a sanitized example of the failing request would help. Please remove your account name, IP addresses and titles first.
+This is a small tool I built for my own setup and shared in case it helps someone else. It is provided as-is.
+
+- **Forking is encouraged.** It's MIT licensed, so fork it and change it however you like.
+- **I'm not taking pull requests or feature requests.**
+- **If it breaks** with a current version of Ryot or Plex, you can open an issue. Include your Ryot and Plex versions and the relay's log lines, and remove your account name, IP addresses and titles first. I'll look when I can, but I can't promise support.
+
+If Ryot fixes the underlying problem upstream, this relay is no longer needed.
 
 ## License
 
