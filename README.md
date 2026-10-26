@@ -103,6 +103,10 @@ The log has one line per event. It never logs the forward URL or the webhook pay
 - Ryot only completes an item when it has already seen an earlier event for it. If the relay is down when an episode starts, that episode can still end up stuck at 0%.
 - This version only addresses the rejected-image problem. It doesn't fix other Ryot issues, and I haven't tested leaving during the credits.
 
+## Sample payloads
+
+[`docs/plex-webhook-samples.json`](docs/plex-webhook-samples.json) has Plex's webhook payloads for one episode (play, pause, resume, scrobble, stop) with account, server and player details replaced. It shows which events carry the image and which have no `viewOffset`.
+
 ## Tests
 
 ```

@@ -1,0 +1,1553 @@
+{
+  "_about": [
+    "Plex webhook payloads for one TV episode watched in Plex Web (Chrome), captured with a small logging listener.",
+    "Ryot v10.5.3, Plex Media Server 1.43.5.11079.",
+    "Two runs, in order: (1) events 1-5: play, pause, resume, then watched to the end (scrobble, stop); (2) events 6-8: play, then watched straight through with no pause (scrobble, stop).",
+    "Sanitized: account name/id/avatar, server name/id, player address/id, library details, artwork and library paths, timestamps and cast/crew names are replaced with placeholders.",
+    "The show and episode details and their public IMDb/TMDB/TVDB IDs are real.",
+    "'request.parts' is the multipart layout of each HTTP request, with the original sizes in bytes; the JSON in this file is shorter than the original because of the replaced values.",
+    "Observation: Metadata.viewOffset is absent on media.play, media.scrobble and media.stop in these runs."
+  ],
+  "events": [
+    {
+      "event": "media.play",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3891
+          },
+          {
+            "headers": "Content-Disposition: form-data; name=\"thumb\"; filename=\"REDACTED\" | Content-Type: image/jpeg",
+            "bytes": 8628
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.play",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "media.pause",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3937
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.pause",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "viewOffset": 61000,
+          "lastViewedAt": 1700000000,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "media.resume",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3938
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.resume",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "viewOffset": 61000,
+          "lastViewedAt": 1700000000,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "media.scrobble",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3935
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.scrobble",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "viewCount": 1,
+          "lastViewedAt": 1700000000,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "media.stop",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3931
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.stop",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "viewCount": 1,
+          "lastViewedAt": 1700000000,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "media.play",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3891
+          },
+          {
+            "headers": "Content-Disposition: form-data; name=\"thumb\"; filename=\"REDACTED\" | Content-Type: image/jpeg",
+            "bytes": 8628
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.play",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "media.scrobble",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3935
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.scrobble",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "viewCount": 1,
+          "lastViewedAt": 1700000000,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "event": "media.stop",
+      "request": {
+        "content_type": "multipart/form-data; boundary=<random>",
+        "parts": [
+          {
+            "headers": "Content-Disposition: form-data; name=\"payload\" | Content-Type: application/json",
+            "bytes": 3931
+          }
+        ]
+      },
+      "payload": {
+        "event": "media.stop",
+        "user": true,
+        "owner": true,
+        "Account": {
+          "id": 1,
+          "thumb": "https://plex.tv/users/REDACTED/avatar",
+          "title": "plex-user"
+        },
+        "Server": {
+          "title": "My Plex Server",
+          "uuid": "00000000-0000-0000-0000-000000000000"
+        },
+        "Player": {
+          "local": true,
+          "publicAddress": "203.0.113.10",
+          "title": "Chrome",
+          "uuid": "REDACTED-player-id"
+        },
+        "Metadata": {
+          "librarySectionType": "show",
+          "ratingKey": "/library/metadata/1000",
+          "key": "/library/metadata/1000",
+          "parentRatingKey": "/library/metadata/1000",
+          "grandparentRatingKey": "/library/metadata/1000",
+          "guid": "plex://episode/5d9c13b9ba6eb9001fc24cea",
+          "parentGuid": "plex://season/602e699e535238002c35ebc4",
+          "grandparentGuid": "plex://show/5d9c08737b5c2e001e65c650",
+          "grandparentSlug": "sherlock-holmes-1954",
+          "type": "episode",
+          "title": "The Case of the Shy Ballerina",
+          "titleSort": "REDACTED",
+          "grandparentKey": "/library/metadata/1000",
+          "parentKey": "/library/metadata/1000",
+          "librarySectionTitle": "Library",
+          "librarySectionID": 7,
+          "librarySectionKey": "/library/sections/7",
+          "grandparentTitle": "Sherlock Holmes (1954)",
+          "parentTitle": "Season 1",
+          "contentRating": "TV-PG",
+          "summary": "Dr. Watson accidentally comes home from his club with another man's coat, providing an important clue when the other man is murdered late that same night.",
+          "index": 6,
+          "parentIndex": 1,
+          "audienceRating": 5.0,
+          "viewCount": 1,
+          "lastViewedAt": 1700000000,
+          "year": 1954,
+          "thumb": "/library/metadata/1000/thumb/0",
+          "art": "/library/metadata/1000/art/0",
+          "parentThumb": "/library/metadata/1000/parentThumb/0",
+          "grandparentThumb": "/library/metadata/1000/grandparentThumb/0",
+          "grandparentArt": "/library/metadata/1000/grandparentArt/0",
+          "duration": 1567914,
+          "originallyAvailableAt": "1954-11-22",
+          "addedAt": 1700000000,
+          "updatedAt": 1700000000,
+          "audienceRatingImage": "REDACTED",
+          "Image": [
+            {
+              "alt": "REDACTED",
+              "type": "coverPoster",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "snapshot",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "background",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "clearLogo",
+              "url": "REDACTED"
+            },
+            {
+              "alt": "REDACTED",
+              "type": "backgroundSquare",
+              "url": "REDACTED"
+            }
+          ],
+          "UltraBlurColors": {
+            "topLeft": "REDACTED",
+            "topRight": "REDACTED",
+            "bottomRight": "REDACTED",
+            "bottomLeft": "REDACTED"
+          },
+          "Guid": [
+            {
+              "id": "imdb://tt0699432"
+            },
+            {
+              "id": "tmdb://377801"
+            },
+            {
+              "id": "tvdb://117361"
+            }
+          ],
+          "Rating": [
+            {
+              "image": "REDACTED",
+              "value": 6.6,
+              "type": "audience"
+            },
+            {
+              "image": "REDACTED",
+              "value": 5.0,
+              "type": "audience"
+            }
+          ],
+          "Director": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Writer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ],
+          "Role": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED"
+            },
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000",
+              "role": "REDACTED",
+              "thumb": "/library/metadata/1000/thumb/0"
+            }
+          ],
+          "Producer": [
+            {
+              "id": 1,
+              "filter": "REDACTED",
+              "tag": "REDACTED",
+              "tagKey": "/library/metadata/1000"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
