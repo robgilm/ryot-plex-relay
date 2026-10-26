@@ -16,7 +16,7 @@ What I found:
 
 - Plex sends each webhook as `multipart/form-data`: a JSON `payload` part, plus, on `media.play` events, a binary poster image (`thumb`) part.
 - Ryot's webhook endpoint reads the whole request body as text, so the image makes it reject every play event.
-- Because the play event is always rejected, the first event Ryot ever sees for an item is the final `media.scrobble`. Per [#1793](https://github.com/IgnisDa/ryot/issues/1793), that creates the watch at 0% "in progress" without completing it.
+- Because play events are rejected, the first event Ryot sees for an item can be the final `media.scrobble`. Per [#1793](https://github.com/IgnisDa/ryot/issues/1793), that creates the watch at 0% "in progress" without completing it. In my 11:10 test (a single delivery path, play event rejected), the episode did end up stuck at 0% in progress.
 
 That matches [#1793](https://github.com/IgnisDa/ryot/issues/1793) (still open when I wrote this) and may be related to [#1826](https://github.com/IgnisDa/ryot/issues/1826). If Ryot fixes it upstream, you won't need this and can remove it.
 
@@ -99,9 +99,9 @@ The log has one line per event. It never logs the forward URL or the webhook pay
 
 - **A watch with no pause may still end up stuck at 0% "in progress".** Plex leaves the playback position out of a `media.play` that starts from the beginning, and Ryot's log shows it rejecting such events (`Webhook processing failed: No position associated with this media`). The finishing `media.scrobble` is then Ryot's first event for the item, which per [#1793](https://github.com/IgnisDa/ryot/issues/1793) it records at 0% without completing it. This version of the relay does not handle that case. I'm testing a change for it and will update this section once I've verified it.
 - In my observation Plex sends **no webhook when you manually mark something watched**, so those never reach Ryot. This relay can't change that.
-- `media.pause` events can carry a stale playback position, so progress may dip while paused. It recovers when playback resumes.
+- In one of my sessions, `media.pause` events repeated an older playback position while `media.resume` reported the real one, so progress could dip while paused. I haven't checked how common that is.
 - Ryot only completes an item when it has already seen an earlier event for it. If the relay is down when an episode starts, that episode can still end up stuck at 0%.
-- This only addresses the rejected-image problem. It doesn't fix other Ryot issues, and I haven't tested skipping to the end or leaving during credits.
+- This version only addresses the rejected-image problem. It doesn't fix other Ryot issues, and I haven't tested leaving during the credits.
 
 ## Tests
 
