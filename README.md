@@ -16,7 +16,7 @@ What I found:
 
 - Plex sends each webhook as `multipart/form-data`: a JSON `payload` part, plus, on `media.play` events, a binary poster image (`thumb`) part.
 - Ryot's webhook endpoint reads the whole request body as text, so the image makes it reject every play event.
-- Because play events are rejected, the first event Ryot sees for an item can be the final `media.scrobble`. Per [#1793](https://github.com/IgnisDa/ryot/issues/1793), that creates the watch at 0% "in progress" without completing it. In my 11:10 test (a single delivery path, play event rejected), the episode did end up stuck at 0% in progress.
+- Because play events are rejected, the first event Ryot sees for an item can be the final `media.scrobble`. Per [#1793](https://github.com/IgnisDa/ryot/issues/1793), that creates the watch at 0% "in progress" without completing it. In one of my early tests (a single delivery path, play event rejected), an episode did end up stuck at 0% in progress. I have not been able to reproduce that since, so I can't say the image is the only cause.
 
 That matches [#1793](https://github.com/IgnisDa/ryot/issues/1793) (still open when I wrote this) and may be related to [#1826](https://github.com/IgnisDa/ryot/issues/1826). If Ryot fixes it upstream, you won't need this and can remove it.
 
@@ -36,6 +36,7 @@ Only my own setup, so treat anything else as untested:
 
 - Ryot v10.5.3 (Docker, self-hosted)
 - Plex Media Server 1.43.5, with Plex Web (Chrome) as the player
+- A straight-through watch with no pause or seeking, with Plex posting only to the relay: completed at 100%.
 - Episodes played with at least one pause and resume: progress was tracked and the item ended up completed at 100%. In some of those runs Plex was also still posting directly to Ryot, so Ryot received each event twice, which may have helped (see Known limits).
 
 ## Setup
@@ -97,7 +98,7 @@ The log has one line per event. It never logs the forward URL or the webhook pay
 
 ## Known limits
 
-- **A watch with no pause may still end up stuck at 0% "in progress".** Plex leaves the playback position out of a `media.play` that starts from the beginning, and Ryot's log shows it rejecting such events (`Webhook processing failed: No position associated with this media`). The finishing `media.scrobble` is then Ryot's first event for the item, which per [#1793](https://github.com/IgnisDa/ryot/issues/1793) it records at 0% without completing it. This version of the relay does not handle that case. I'm testing a change for it and will update this section once I've verified it.
+- **Plex's `media.play` has no playback position when it starts from the beginning**, and Ryot's log shows it rejecting those events (`Webhook processing failed: No position associated with this media`). In my last test (this relay only, no pause, no seeking) the watch still ended up completed at 100% through the final `media.scrobble`. In an earlier run without the relay, a watch ended up stuck at 0% "in progress" and I don't know why, so don't treat the relay as a guarantee.
 - In my observation Plex sends **no webhook when you manually mark something watched**, so those never reach Ryot. This relay can't change that.
 - In one of my sessions, `media.pause` events repeated an older playback position while `media.resume` reported the real one, so progress could dip while paused. I haven't checked how common that is.
 - Ryot only completes an item when it has already seen an earlier event for it. If the relay is down when an episode starts, that episode can still end up stuck at 0%.
