@@ -1,0 +1,10 @@
+services:
+  ryot-plex-relay:
+    image: ghcr.io/robgilm/ryot-plex-relay:latest
+    container_name: ryot-plex-relay
+    restart: unless-stopped
+    environment:
+      # The Plex Sink URL from Ryot (Settings > Integrations), using an address this container can reach.
+      - FORWARD_URL=http://ryot:8000/_i/YOUR_INTEGRATION_ID
+    ports:
+      - "9876:8080"
