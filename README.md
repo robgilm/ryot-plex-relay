@@ -28,7 +28,7 @@ The relay sits between Plex and Ryot. It keeps only the JSON `payload` part of e
 Plex  ->  ryot-plex-relay  ->  Ryot  /_i/<integration id>
 ```
 
-With the play event getting through, Ryot tracks progress as you watch and the scrobble completes the item.
+With the play event no longer rejected for its image, Ryot could track progress and complete items in my tests. This does not fix everything, so read [Known limits](#known-limits).
 
 ## Tested with
 
@@ -36,7 +36,7 @@ Only my own setup, so treat anything else as untested:
 
 - Ryot v10.5.3 (Docker, self-hosted)
 - Plex Media Server 1.43.5, with Plex Web (Chrome) as the player
-- A test episode played through with a pause and resume; a never-before-seen episode ended up completed at 100%
+- Episodes played with at least one pause and resume: progress was tracked and the item ended up completed at 100%. In some of those runs Plex was also still posting directly to Ryot, so Ryot received each event twice, which may have helped (see Known limits).
 
 ## Setup
 
@@ -70,11 +70,11 @@ $ docker logs ryot-plex-relay
 2026-10-26 11:51:56 media.scrobble -> Ryot 202
 ```
 
-`202` means Ryot accepted the event. Ryot then processes it in the background, so give the dashboard a moment.
+`202` only means Ryot queued the event. It processes it in the background and can still reject it, so a `202` is not proof the watch was recorded. To see what Ryot did with each event, run it with `RUST_LOG=ryot=debug` and read its log.
 
 | Log line | Meaning |
 |---|---|
-| `-> Ryot 202` | Accepted |
+| `-> Ryot 202` | Queued (not necessarily recorded) |
 | `-> Ryot 400` / `404` | Check `FORWARD_URL`: wrong path or integration id |
 | `-> Ryot URLError` (or another exception name) | The relay can't reach Ryot at `FORWARD_URL` |
 | Nothing at all | Plex isn't reaching the relay: check the webhook URL, the port and your firewall |
@@ -97,7 +97,8 @@ The log has one line per event. It never logs the forward URL or the webhook pay
 
 ## Known limits
 
-- Plex sends **no webhook when you manually mark something watched**, so those never reach Ryot. This relay can't change that.
+- **A watch with no pause may still end up stuck at 0% "in progress".** Plex leaves the playback position out of a `media.play` that starts from the beginning, and Ryot's log shows it rejecting such events (`Webhook processing failed: No position associated with this media`). The finishing `media.scrobble` is then Ryot's first event for the item, which per [#1793](https://github.com/IgnisDa/ryot/issues/1793) it records at 0% without completing it. This version of the relay does not handle that case. I'm testing a change for it and will update this section once I've verified it.
+- In my observation Plex sends **no webhook when you manually mark something watched**, so those never reach Ryot. This relay can't change that.
 - `media.pause` events can carry a stale playback position, so progress may dip while paused. It recovers when playback resumes.
 - Ryot only completes an item when it has already seen an earlier event for it. If the relay is down when an episode starts, that episode can still end up stuck at 0%.
 - This only addresses the rejected-image problem. It doesn't fix other Ryot issues, and I haven't tested skipping to the end or leaving during credits.
