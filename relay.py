@@ -38,25 +38,34 @@ def event_name(body):
     return found.group(1).decode("utf8", "replace") if found else "unknown"
 
 
-def make_handler(forward_url, timeout):
+def make_handler(forward_url, timeout, scrobble_repeats=1, repeat_delay=0.2):
+    def forward(out, content_type):
+        request = urllib.request.Request(
+            forward_url, data=out, method="POST", headers={"Content-Type": content_type}
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as reply:
+                return reply.status
+        except urllib.error.HTTPError as err:
+            return err.code
+        except Exception as err:
+            return type(err).__name__
+
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
             length = int(self.headers.get("Content-Length") or 0)
             body = self.rfile.read(length)
             content_type = self.headers.get("Content-Type", "")
             out = strip_to_payload(body, content_type)
-            request = urllib.request.Request(
-                forward_url, data=out, method="POST", headers={"Content-Type": content_type}
-            )
-            try:
-                with urllib.request.urlopen(request, timeout=timeout) as reply:
-                    status = reply.status
-            except urllib.error.HTTPError as err:
-                status = err.code
-            except Exception as err:
-                status = type(err).__name__
-            # The forward URL contains Ryot's webhook id, so it is never logged.
-            print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {event_name(out)} -> Ryot {status}", flush=True)
+            event = event_name(out)
+            # In my tests Ryot only completed a watch when it received media.scrobble twice.
+            sends = scrobble_repeats if event == "media.scrobble" else 1
+            for i in range(sends):
+                if i:
+                    time.sleep(repeat_delay)
+                status = forward(out, content_type)
+                # The forward URL contains Ryot's webhook id, so it is never logged.
+                print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {event} -> Ryot {status}", flush=True)
             # Plex does not retry, so it always gets a quick 200.
             self.send_response(200)
             self.end_headers()
@@ -73,8 +82,10 @@ def main():
         sys.exit("FORWARD_URL is required: the Plex Sink URL shown in Ryot (…/_i/<id>)")
     port = int(os.environ.get("LISTEN_PORT", "8080"))
     timeout = float(os.environ.get("FORWARD_TIMEOUT", "15"))
+    scrobble_repeats = max(1, int(os.environ.get("SCROBBLE_REPEATS", "1")))
     print(f"Listening on :{port}", flush=True)
-    ThreadingHTTPServer(("0.0.0.0", port), make_handler(forward_url, timeout)).serve_forever()
+    handler = make_handler(forward_url, timeout, scrobble_repeats)
+    ThreadingHTTPServer(("0.0.0.0", port), handler).serve_forever()
 
 
 if __name__ == "__main__":

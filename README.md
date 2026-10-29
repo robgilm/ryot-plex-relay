@@ -27,16 +27,15 @@ The relay sits between Plex and Ryot. It keeps only the JSON `payload` part of e
 Plex  ->  ryot-plex-relay  ->  Ryot  /_i/<integration id>
 ```
 
-With the play event no longer rejected for its image, Ryot could track progress and complete items in my tests. This does not fix everything, so read [Known limits](#known-limits).
+With the image gone, Ryot accepts the `media.play` request, but in my tests it then fails to process it (see [Known limits](#known-limits)). Stripping the image alone did not make Ryot complete a watch. What did was sending `media.scrobble` to Ryot twice, which is what the `SCROBBLE_REPEATS` setting does. This is a workaround for a Ryot problem I reported upstream ([#1826](https://github.com/IgnisDa/ryot/issues/1826)), not a proper fix.
 
 ## Tested with
 
 Only my own setup, so treat anything else as untested:
 
-- Ryot v10.5.3 (Docker, self-hosted)
+- Ryot v10.5.5 (Docker, self-hosted; version as shown in the Ryot footer)
 - Plex Media Server 1.43.5, with Plex Web (Chrome) as the player
-- A straight-through watch with no pause or seeking, with Plex posting only to the relay: completed at 100%.
-- Episodes played with at least one pause and resume: progress was tracked and the item ended up completed at 100%. In some of those runs Plex was also still posting directly to Ryot, so Ryot received each event twice.
+- With one `media.scrobble` per watch (the default here), Ryot created the watch at 0% in progress and never completed it. In my runs where Plex also delivered each event to Ryot a second time, the episodes ended at 100%.
 
 ## Setup
 
@@ -86,6 +85,7 @@ $ docker logs ryot-plex-relay
 | `FORWARD_URL` | required | Ryot's Plex Sink URL |
 | `LISTEN_PORT` | `8080` | Port inside the container |
 | `FORWARD_TIMEOUT` | `15` | Seconds to wait for Ryot |
+| `SCROBBLE_REPEATS` | `1` | Times to forward each `media.scrobble` to Ryot. Set to `2` to work around watches staying at 0% (see [Known limits](#known-limits)). Other events are always sent once. |
 
 The log has one line per event. It never logs the forward URL or the webhook payload.
 
@@ -97,10 +97,11 @@ The log has one line per event. It never logs the forward URL or the webhook pay
 
 ## Known limits
 
-- **Plex's `media.play` has no playback position when it starts from the beginning**, and Ryot's log shows it rejecting those events (`Webhook processing failed: No position associated with this media`). In my last test (this relay only, no pause, no seeking) the watch still ended up completed at 100% through the final `media.scrobble`. I have tested this on one setup only, so don't treat the relay as a guarantee.
+- **A single `media.scrobble` does not complete a watch in Ryot** in my tests: Ryot created the watch at 0% in progress and stopped. When the same scrobble reached Ryot twice, the second one completed it. `SCROBBLE_REPEATS=2` forwards it twice. It is a workaround based on a few runs on my setup, and if Ryot fixes the problem you should set it back to `1`. In one run, a watch left stuck at 0% also stopped a new watch of another episode of the same show from being recorded.
+- **Plex's `media.play` and `media.stop` often carry no playback position**, and Ryot's log shows it rejecting those events (`Webhook processing failed: No position associated with this media`). This relay can't change that. Only the `media.scrobble` event produced a watch in my tests.
 - In my observation Plex sends **no webhook when you manually mark something watched**, so those never reach Ryot. This relay can't change that.
 - In one of my sessions, `media.pause` events repeated an older playback position while `media.resume` reported the real one, so progress could dip while paused. I haven't checked how common that is.
-- This version only addresses the rejected-image problem. It doesn't fix other Ryot issues, and I haven't tested leaving during the credits.
+- This only works around the rejected image and (optionally) the missing completion. It doesn't fix other Ryot issues.
 
 ## Sample payloads
 
